@@ -40,7 +40,7 @@ namespace Lbookshelf.Utils
                     var book = (Book)AssociatedObject.DataContext;
                     book.Thumbnail = fileName;
 
-                }, "Image files|*.jpg", ".jpg");
+                }, "Image files|*.jpg;*.png", ".jpg");
         }
     }
 }
