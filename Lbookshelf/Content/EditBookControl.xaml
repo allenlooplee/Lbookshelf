@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:biz="clr-namespace:Lbookshelf.Business"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:utils="clr-namespace:Lbookshelf.Utils"
              mc:Ignorable="d" Width="400"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -19,7 +21,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border Margin="0,0,0,6" HorizontalAlignment="Left">
-            <Image Width="128" Height="160" Source="{Binding Thumbnail, Converter={StaticResource UriToImageSource}}"/>
+            <Image Width="128" Height="160" Source="{Binding Thumbnail, Converter={StaticResource UriToImageSource}}">
+                <i:Interaction.Behaviors>
+                    <utils:ChangeThumbnailBehavior/>
+                </i:Interaction.Behaviors>
+            </Image>
         </Border>
         <StackPanel Grid.Row="1" Margin="0,0,3,6">
             <TextBlock Text="Title" Margin="0,0,0,3"/>

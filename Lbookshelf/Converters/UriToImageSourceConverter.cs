@@ -31,6 +31,10 @@ namespace Lbookshelf.Converters
 
                 imageSource = new BitmapImage();
                 imageSource.BeginInit();
+                // Set CreateOptions to IgnoreImageCache so that Image refreshes
+                // when the uri of the thumbnail stays the same.
+                imageSource.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                // Set CacheOption to OnLoad so that image file will not be locked.
                 imageSource.CacheOption = BitmapCacheOption.OnLoad;
                 imageSource.UriSource = new Uri(imageUri, UriKind.Absolute);
                 imageSource.EndInit();

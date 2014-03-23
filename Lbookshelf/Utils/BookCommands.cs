@@ -70,7 +70,19 @@ namespace Lbookshelf.Utils
                         {
                             try
                             {
+                                // If the use choose another thumbnail, the file name of
+                                // the new thumbnail must be different from the original
+                                // one since the OpenFileDialog returns an absolute path
+                                // and original one is a relative path.
+                                var thumbnailChanged = book.Thumbnail != changed.Thumbnail;
+
                                 BookManager.Instance.Update(book, changed);
+
+                                // Refresh the thumbnail if it's been changed.
+                                if (thumbnailChanged)
+                                {
+                                    book.RefreshThumbnail();
+                                }
                             }
                             catch (BookOpenedException ex)
                             {

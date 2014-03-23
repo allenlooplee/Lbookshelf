@@ -73,6 +73,19 @@ namespace Lbookshelf.Business
                 .Where(t => t.Item2 != t.Item3)
                 .ToArray();
 
+            // Copy the new thumbnail and overwrite the existing one if the user has changed it.
+            if (original.Thumbnail != changed.Thumbnail)
+            {
+                var destinationThumbnail = Path.Combine("Images", Path.ChangeExtension(original.FileName, ".jpg"));
+
+                File.Copy(
+                    changed.Thumbnail,  // This is actually a full path returned from OpenFileDialog.
+                    Path.Combine(Environment.CurrentDirectory, destinationThumbnail),
+                    true);
+
+                changed.Thumbnail = destinationThumbnail;
+            }
+
             // Merge changes to original book.
             original.MergeChanges(changed);
 

@@ -126,6 +126,7 @@
     <Compile Include="Services\IBookService.cs" />
     <Compile Include="Utils\BookCommands.cs" />
     <Compile Include="Utils\BuildContextMenuBehavior.cs" />
+    <Compile Include="Utils\ChangeThumbnailBehavior.cs" />
     <Compile Include="Utils\DelegateComparer.cs" />
     <Compile Include="Utils\DialogService.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />

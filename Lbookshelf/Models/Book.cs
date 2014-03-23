@@ -121,6 +121,17 @@ namespace Lbookshelf.Models
             }
         }
 
+        /// <summary>
+        /// When changing the thumbnail of a book, the file name of the thumbnail
+        /// stays the same as before, but the content of the corresponding image
+        /// might change completely. This method notify the change of the image
+        /// even if the value of Thumbnail remains the same.
+        /// </summary>
+        public void RefreshThumbnail()
+        {
+            RaisePropertyChanged("Thumbnail");
+        }
+
         private string _fileName;
         public string FileName
         {
