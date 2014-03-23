@@ -89,12 +89,12 @@ namespace Lbookshelf.Utils
             dialog.ShowDialog();
         }
 
-        private static OpenFileDialog CreateOpenFileDialog(bool multiselect, string initialDirectory)
+        private static OpenFileDialog CreateOpenFileDialog(bool multiselect, string filter, string defaultExt, string initialDirectory)
         {
             return new OpenFileDialog
             {
-                DefaultExt = ".pdf",
-                Filter = "PDF documents|*.pdf",
+                DefaultExt = defaultExt,
+                Filter = filter,
                 AddExtension = true,
                 CheckFileExists = true,
                 CheckPathExists = true,
@@ -103,9 +103,9 @@ namespace Lbookshelf.Utils
             };
         }
 
-        public static void ShowOpenFileDialog(Action<string> okAction, string initialDirectory = "")
+        public static void ShowOpenFileDialog(Action<string> okAction, string filter = "PDF documents|*.pdf", string defaultExt = ".pdf", string initialDirectory = "")
         {
-            var openFileDialog = CreateOpenFileDialog(false, initialDirectory);
+            var openFileDialog = CreateOpenFileDialog(false, filter, defaultExt, initialDirectory);
 
             if (openFileDialog.ShowDialog() == true && okAction != null)
             {
@@ -113,9 +113,9 @@ namespace Lbookshelf.Utils
             }
         }
 
-        public static void ShowOpenFileDialog(Action<string[]> okAction, string initialDirectory = "")
+        public static void ShowOpenFileDialog(Action<string[]> okAction, string filter = "PDF documents|*.pdf", string defaultExt = ".pdf", string initialDirectory = "")
         {
-            var openFileDialog = CreateOpenFileDialog(true, initialDirectory);
+            var openFileDialog = CreateOpenFileDialog(true, filter, defaultExt, initialDirectory);
 
             if (openFileDialog.ShowDialog() == true && okAction != null)
             {
