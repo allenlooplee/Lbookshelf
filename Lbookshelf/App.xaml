@@ -1,0 +1,43 @@
+﻿<Application x:Class="Lbookshelf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:converters="clr-namespace:Lbookshelf.Converters"
+             xmlns:viewModels="clr-namespace:Lbookshelf.ViewModels"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--Font sizes-->
+            <sys:Double x:Key="FontSizeSmall">12</sys:Double>
+            <sys:Double x:Key="FontSizeNormal">14</sys:Double>
+            <sys:Double x:Key="FontSizeMedium">16</sys:Double>
+            <sys:Double x:Key="FontSizeMediumLarge">18</sys:Double>
+            <sys:Double x:Key="FontSizeLarge">24</sys:Double>
+            <sys:Double x:Key="FontSizeExtraLarge">30</sys:Double>
+            <sys:Double x:Key="FontSizeExtraExtraLarge">64</sys:Double>
+            <sys:Double x:Key="FontSizeHuge">128</sys:Double>
+            
+            <!--Converters-->
+            <converters:StringArrayToStringConverter x:Key="StringArrayToString"/>
+            <converters:StringToUriConverter x:Key="StringToUri"/>
+            <converters:StringArrayToLinksConverter x:Key="StringArrayToLinks"/>
+            <converters:UriToImageSourceConverter x:Key="UriToImageSource"/>
+            <converters:IntegerToBooleanConverter x:Key="IntegerToBoolean"/>
+            <converters:IntegerToVisibilityConverter x:Key="IntegerToVisibility"/>
+            <converters:EnumToVisibilityConverter x:Key="EnumToVisibility"/>
+
+            <!--View models-->
+            <!--<viewModels:BrowseBooksViewModel x:Key="BrowseBooks"/>-->
+
+            <!--Styles-->
+            <Style x:Key="StretchFlatListBoxItem" TargetType="ListBoxItem" BasedOn="{StaticResource FlatListBoxItem}">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            </Style>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

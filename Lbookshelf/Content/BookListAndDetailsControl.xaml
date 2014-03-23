@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Lbookshelf.Content.BookListAndDetailsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:utils="clr-namespace:Lbookshelf.Utils"
+             xmlns:global="clr-namespace:Lbookshelf"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource StretchFlatListBoxItem}" Margin="0,0,12,0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction
+                        Command="{x:Static utils:BookCommands.OpenBookCommand}"
+                        CommandParameter="{Binding SelectedBook}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="6,3,6,3">
+                        <i:Interaction.Behaviors>
+                            <utils:BuildContextMenuBehavior TemplateName="{Binding SelectedDimensionKey, Source={x:Static global:App.BrowseBooksViewModel}}"/>
+                        </i:Interaction.Behaviors>
+                        <TextBlock Text="{Binding Title}" FontSize="{StaticResource FontSizeMedium}" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding Authors, Converter={StaticResource StringArrayToString}}" Foreground="Gray" FontSize="{StaticResource FontSizeSmall}" TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ScrollViewer Grid.Column="1" Margin="12,0,0,0">
+            <StackPanel DataContext="{Binding SelectedBook}">
+                <Image Source="{Binding Thumbnail, Converter={StaticResource UriToImageSource}}" Width="128" Height="160" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding Title}" FontSize="{StaticResource FontSizeMedium}" Margin="0,12,0,12" TextWrapping="Wrap" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Authors, Converter={StaticResource StringArrayToString}}" Visibility="{Binding Authors.Length, Converter={StaticResource IntegerToVisibility}}" Margin="0,0,0,12" TextWrapping="Wrap" FontStyle="Italic"/>
+                <TextBlock Text="{Binding Isbn, StringFormat='ISBN-13: {0}'}" Visibility="{Binding Isbn, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter='inverse'}" Margin="0,0,0,3" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Publisher, StringFormat='Publisher: {0}'}" Visibility="{Binding Publisher, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter='inverse'}" Margin="0,0,0,3" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding PublishedDate, StringFormat='Published date: {0:yyyy-MM-dd}'}" Margin="0,0,0,3" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Category, StringFormat='Category: {0}'}" Margin="0,0,0,12" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Description}" Visibility="{Binding Description, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter='inverse'}" Margin="0,0,0,3" TextWrapping="Wrap"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

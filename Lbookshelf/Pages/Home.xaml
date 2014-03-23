@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="Lbookshelf.Pages.Home"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:utils="clr-namespace:Lbookshelf.Utils"
+             xmlns:global="clr-namespace:Lbookshelf"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate x:Key="BookTitleItemTemplate">
+            <TextBlock Text="{Binding Title}" FontSize="{StaticResource FontSizeNormal}" Margin="6,3,6,3" TextTrimming="CharacterEllipsis"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Style="{StaticResource ContentRoot}" DataContext="{x:Static global:App.HomeViewModel}">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Horizontal" MinWidth="200">
+                <Grid Width="250">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="NEW" Style="{StaticResource Heading2}" Margin="6,0,0,6"/>
+                        <ListBox x:Name="recentlyAdded" ItemsSource="{Binding RecentlyAdded}" ItemTemplate="{StaticResource BookTitleItemTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction
+                                    Command="{x:Static utils:BookCommands.OpenBookCommand}"
+                                    CommandParameter="{Binding SelectedItem, ElementName=recentlyAdded}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="0,24,0,0">
+                        <TextBlock Text="HISTORY" Style="{StaticResource Heading2}" Margin="6,0,0,6"/>
+                        <ListBox x:Name="recentlyOpened" ItemsSource="{Binding RecentlyOpened}" ItemTemplate="{StaticResource BookTitleItemTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction
+                                    Command="{x:Static utils:BookCommands.OpenBookCommand}"
+                                    CommandParameter="{Binding SelectedItem, ElementName=recentlyOpened}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+                    </StackPanel>
+                </Grid>
+                <StackPanel Margin="24,0,0,0">
+                    <TextBlock Text="PINNED" Style="{StaticResource Heading2}" Margin="3,0,0,6"/>
+                    <ListBox x:Name="pinned" ItemsSource="{Binding Pinned}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction
+                                    Command="{x:Static utils:BookCommands.OpenBookCommand}"
+                                    CommandParameter="{Binding SelectedItem, ElementName=pinned}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Vertical" Height="350"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <i:Interaction.Behaviors>
+                                        <utils:BuildContextMenuBehavior TemplateName="Pinned"/>
+                                    </i:Interaction.Behaviors>
+                                    <Image Width="128" Height="160" Source="{Binding Thumbnail, Converter={StaticResource UriToImageSource}}" Margin="3"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{29203AF2-B7E4-4EAC-BF79-AC948B4EBF74}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lbookshelf</RootNamespace>
+    <AssemblyName>Lbookshelf</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Lbookshelf.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FirstFloor.ModernUI">
+      <HintPath>..\packages\ModernUI.WPF.1.0.5\lib\net45\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Ldata">
+      <HintPath>..\..\Ldata\Ldata.Json\bin\Debug\Ldata.dll</HintPath>
+    </Reference>
+    <Reference Include="Ldata.Json">
+      <HintPath>..\..\Ldata\Ldata.Json\bin\Debug\Ldata.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Ldata\Ldata.Json\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-WPF">
+      <HintPath>lib\PdfSharp-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\BooklistDimension.cs" />
+    <Compile Include="Business\BookManager.cs" />
+    <Compile Include="Business\BookOpenedException.cs" />
+    <Compile Include="Business\CategoryDimension.cs" />
+    <Compile Include="Business\DefaultPropertyValues.cs" />
+    <Compile Include="Business\ComputedDimension.cs" />
+    <Compile Include="Business\Dimension.cs" />
+    <Compile Include="Business\DimensionManager.cs" />
+    <Compile Include="Business\StorageManager.cs" />
+    <Compile Include="Business\PublisherDimension.cs" />
+    <Compile Include="Content\ActionListControl.xaml.cs">
+      <DependentUpon>ActionListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BookListAndDetailsControl.xaml.cs">
+      <DependentUpon>BookListAndDetailsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ChooseBooklistControl.xaml.cs">
+      <DependentUpon>ChooseBooklistControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\EditBookControl.xaml.cs">
+      <DependentUpon>EditBookControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\FindBookInfoControl.xaml.cs">
+      <DependentUpon>FindBookInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\SettingsServicesControl.xaml.cs">
+      <DependentUpon>SettingsServicesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringArrayToLinksConverter.cs" />
+    <Compile Include="Converters\StringToUriConverter.cs" />
+    <Compile Include="Converters\IntegerToBooleanConverter.cs" />
+    <Compile Include="Converters\IntegerToVisibilityConverter.cs" />
+    <Compile Include="Converters\UriToImageSourceConverter.cs" />
+    <Compile Include="Pages\BrowseBookGroupsPage.xaml.cs">
+      <DependentUpon>BrowseBookGroupsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BrowseBooksPage.xaml.cs">
+      <DependentUpon>BrowseBooksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\BookServiceBase.cs" />
+    <Compile Include="Services\DoubanBooks.cs" />
+    <Compile Include="Services\GoogleBooks.cs" />
+    <Compile Include="Services\IBookService.cs" />
+    <Compile Include="Utils\BookCommands.cs" />
+    <Compile Include="Utils\BuildContextMenuBehavior.cs" />
+    <Compile Include="Utils\DelegateComparer.cs" />
+    <Compile Include="Utils\DialogService.cs" />
+    <Compile Include="Utils\ExtensionMethods.cs" />
+    <Compile Include="Utils\SortedObservableGroup.cs" />
+    <Compile Include="Utils\SortedObservableCollection.cs" />
+    <Compile Include="Utils\Pair.cs" />
+    <Compile Include="Utils\SettingManager.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>SettingManager.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\BrowseBooksViewModel.cs" />
+    <Compile Include="ViewModels\FindBookInfoViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\SearchBooksViewModel.cs" />
+    <Compile Include="ViewModels\SettingsFileSystemViewModel.cs" />
+    <Compile Include="ViewModels\SettingsServicesViewModel.cs" />
+    <Page Include="Content\ActionListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\BookListAndDetailsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\ChooseBooklistControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\EditBookControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\FindBookInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\SettingsFileSystemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\SettingsServicesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Content\SettingsFileSystemControl.xaml.cs">
+      <DependentUpon>SettingsFileSystemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Content\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Content\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Content\SettingsAppearance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Content\SettingsAppearance.xaml.cs">
+      <DependentUpon>SettingsAppearance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\ObservableObject.cs" />
+    <Compile Include="Pages\ImportBooksPage.xaml.cs">
+      <DependentUpon>ImportBooksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SearchBooksPage.xaml.cs">
+      <DependentUpon>SearchBooksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\DataCollectionNames.cs" />
+    <Compile Include="Converters\StringArrayToStringConverter.cs" />
+    <Compile Include="ViewModels\ImportBooksViewModel.cs" />
+    <Compile Include="ViewModels\SettingsAppearanceViewModel.cs" />
+    <Page Include="Pages\BrowseBookGroupsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BrowseBooksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ImportBooksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SearchBooksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Utils\SettingManager.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SettingManager.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\DefaultThumbnail.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Lbookshelf.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
