@@ -29,7 +29,11 @@ namespace Lbookshelf.Converters
                     imageUri = GetAbsolutePath(imageUri);
                 }
 
-                imageSource = new BitmapImage(new Uri(imageUri, UriKind.Absolute));
+                imageSource = new BitmapImage();
+                imageSource.BeginInit();
+                imageSource.CacheOption = BitmapCacheOption.OnLoad;
+                imageSource.UriSource = new Uri(imageUri, UriKind.Absolute);
+                imageSource.EndInit();
             }
 
             return imageSource;
