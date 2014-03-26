@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:utils="clr-namespace:Lbookshelf.Utils"
              xmlns:global="clr-namespace:Lbookshelf"
+             xmlns:content="clr-namespace:Lbookshelf.Content"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -33,17 +34,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ScrollViewer Grid.Column="1" Margin="12,0,0,0">
-            <StackPanel DataContext="{Binding SelectedBook}">
-                <Image Source="{Binding Thumbnail, Converter={StaticResource UriToImageSource}}" Width="128" Height="160" HorizontalAlignment="Left"/>
-                <TextBlock Text="{Binding Title}" FontSize="{StaticResource FontSizeMedium}" Margin="0,12,0,12" TextWrapping="Wrap" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Authors, Converter={StaticResource StringArrayToString}}" Visibility="{Binding Authors.Length, Converter={StaticResource IntegerToVisibility}}" Margin="0,0,0,12" TextWrapping="Wrap" FontStyle="Italic"/>
-                <TextBlock Text="{Binding Isbn, StringFormat='ISBN-13: {0}'}" Visibility="{Binding Isbn, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter='inverse'}" Margin="0,0,0,3" TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding Publisher, StringFormat='Publisher: {0}'}" Visibility="{Binding Publisher, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter='inverse'}" Margin="0,0,0,3" TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding PublishedDate, StringFormat='Published date: {0:yyyy-MM-dd}'}" Margin="0,0,0,3" TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding Category, StringFormat='Category: {0}'}" Margin="0,0,0,12" TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding Description}" Visibility="{Binding Description, Converter={StaticResource NullOrEmptyStringToVisibilityConverter}, ConverterParameter='inverse'}" Margin="0,0,0,3" TextWrapping="Wrap"/>
-            </StackPanel>
-        </ScrollViewer>
+        <content:BookInfoControl DataContext="{Binding SelectedBook}" Grid.Column="1" Margin="12,0,0,0"/>
     </Grid>
 </UserControl>

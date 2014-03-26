@@ -111,7 +111,9 @@ namespace Lbookshelf.Utils
                     CreateOpenBookInFileExplorerMenuItem(book),
                     new Separator(),
                     CreatePinOrUnpinMenuItem(book),
-                    CreateAddToBooklistMenuItem(book)
+                    CreateAddToBooklistMenuItem(book),
+                    new Separator(),
+                    CreateShowBookInfoMenuItem(book)
                 }
             };
         }
@@ -200,5 +202,15 @@ namespace Lbookshelf.Utils
         //        CommandParameter = book
         //    };
         //}
+
+        private MenuItem CreateShowBookInfoMenuItem(Book book)
+        {
+            return new MenuItem
+            {
+                Header = "Properties",
+                Command = BookCommands.ShowBookInfoCommand,
+                CommandParameter = book
+            };
+        }
     }
 }

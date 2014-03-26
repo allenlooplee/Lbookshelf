@@ -134,6 +134,21 @@ namespace Lbookshelf.Utils
                         },
                         new Size(600, 500));
                 });
+
+            ShowBookInfoCommand = new ActionCommand(
+                obj =>
+                {
+                    var original = (Book)obj;
+                    var clone = original.Clone();
+                    clone.Title = null;
+
+                    DialogService.ShowDialog(
+                        original.Title,
+                        new Uri("/Content/BookInfoControl.xaml", UriKind.Relative),
+                        clone,
+                        () => { },
+                        new Size(500, 500));
+                });
         }
 
         public static ICommand OpenBookCommand { get; private set; }
@@ -149,6 +164,8 @@ namespace Lbookshelf.Utils
         public static ICommand DeleteBookCommand { get; set; }
 
         public static ICommand FindBookInfoCommand { get; private set; }
+
+        public static ICommand ShowBookInfoCommand { get; private set; }
 
         private static ICommand CreateCommand(Action<Book> bookAction)
         {
