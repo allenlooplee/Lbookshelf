@@ -26,12 +26,7 @@ namespace Lbookshelf
                 if (_dataStore == null)
                 {
                     _dataStore = new JsonDataStore("db");
-                    //_dataStore.RegisterPartitionSelector<Book>(obj => DataCollectionNames.Books);
-                    //_dataStore.RegisterPartitionSelector<string>(obj => DataCollectionNames.RecentKeywords);
                     _dataStore.RegisterPartitionSelector<SortedObservableGroup<string, Book>>(DataCollectionNames.Booklists, obj => obj.Key);
-                    //_dataStore.RegisterPartitionSelector<Book>(obj => DataCollectionNames.RecentlyAdded);
-                    //_dataStore.RegisterPartitionSelector<Book>(obj => DataCollectionNames.RecentlyOpened);
-                    //_dataStore.RegisterPartitionSelector<Book>(obj => DataCollectionNames.Pinned);
                 }
 
                 return _dataStore;
