@@ -62,7 +62,9 @@ namespace Lbookshelf.Utils
                     CreateOpenBookInFileExplorerMenuItem(book),
                     new Separator(),
                     CreatePinOrUnpinMenuItem(book),
-                    CreateAddToBooklistMenuItem(book)
+                    CreateAddToBooklistMenuItem(book),
+                    new Separator(),
+                    CreateShowBookInfoMenuItem(book)
                 }
             };
         }
