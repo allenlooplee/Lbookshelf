@@ -133,6 +133,7 @@
     <Compile Include="Utils\DelegateComparer.cs" />
     <Compile Include="Utils\DialogService.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
+    <Compile Include="Utils\InvokeCommandOnEnterBehavior.cs" />
     <Compile Include="Utils\SortedObservableGroup.cs" />
     <Compile Include="Utils\SortedObservableCollection.cs" />
     <Compile Include="Utils\Pair.cs" />

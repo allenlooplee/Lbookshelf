@@ -24,11 +24,9 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBox Text="{Binding Keywords, UpdateSourceTrigger=PropertyChanged}">
-                <i:Interaction.Triggers>
-                    <ei:KeyTrigger Key="Enter" FiredOn="KeyUp">
-                        <i:InvokeCommandAction Command="{Binding SearchCommand}"/>
-                    </ei:KeyTrigger>
-                </i:Interaction.Triggers>
+                <i:Interaction.Behaviors>
+                    <utils:InvokeCommandOnEnterBehavior Command="{Binding SearchCommand}"/>
+                </i:Interaction.Behaviors>
             </TextBox>
             <Button Grid.Column="1" Content="Search" Command="{Binding SearchCommand}" Width="80" Margin="6,0,0,0"/>
         </Grid>
