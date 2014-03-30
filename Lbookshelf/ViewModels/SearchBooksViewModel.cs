@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Lbookshelf.Utils;
 using Lapps.Utils;
+using Lapps.Data;
 
 namespace Lbookshelf.ViewModels
 {
@@ -110,7 +111,7 @@ namespace Lbookshelf.ViewModels
             RecentKeywordCollection.Insert(RecentKeywords);
         }
 
-        private Ldata.IDataCollection<string> RecentKeywordCollection
+        private IDataCollection<string> RecentKeywordCollection
         {
             get { return App.DataStore.GetCollection<string>(DataCollectionNames.RecentKeywords); }
         }

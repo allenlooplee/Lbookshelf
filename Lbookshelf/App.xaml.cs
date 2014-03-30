@@ -1,8 +1,7 @@
 ﻿using Lbookshelf.Models;
 using Lbookshelf.Utils;
 using Lbookshelf.ViewModels;
-using Ldata;
-using Ldata.Json;
+using Lapps.Data.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Lapps.Data;
 
 namespace Lbookshelf
 {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lbookshelf.Utils;
+using Lapps.Data;
 
 namespace Lbookshelf.Business
 {
@@ -87,7 +88,7 @@ namespace Lbookshelf.Business
             }
         }
 
-        private Ldata.IDataCollection<SortedObservableGroup<string, Book>> BooklistCollection
+        private IDataCollection<SortedObservableGroup<string, Book>> BooklistCollection
         {
             get { return App.DataStore.GetCollection<SortedObservableGroup<string, Book>>(DataCollectionNames.Booklists); }
         }

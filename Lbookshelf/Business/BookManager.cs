@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Lapps.Data;
 
 namespace Lbookshelf.Business
 {
@@ -25,7 +26,7 @@ namespace Lbookshelf.Business
             get { return _instance; }
         }
 
-        private Ldata.IDataCollection<Book> _books;
+        private IDataCollection<Book> _books;
         public IEnumerable<Book> Books
         {
             get { return _books.AsEnumerable(); }

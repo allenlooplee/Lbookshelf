@@ -1,4 +1,5 @@
-﻿using Lbookshelf.Models;
+﻿using Lapps.Data;
+using Lbookshelf.Models;
 using Lbookshelf.Utils;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,13 @@ namespace Lbookshelf.ViewModels
         }
 
         public ObservableCollection<Book> RecentlyAdded { get; private set; }
-        private Ldata.IDataCollection<Book> RecentlyAddedCollection
+        private IDataCollection<Book> RecentlyAddedCollection
         {
             get { return App.DataStore.GetCollection<Book>(DataCollectionNames.RecentlyAdded); }
         }
 
         public ObservableCollection<Book> RecentlyOpened { get; private set; }
-        private Ldata.IDataCollection<Book> RecentlyOpenedCollection
+        private IDataCollection<Book> RecentlyOpenedCollection
         {
             get { return App.DataStore.GetCollection<Book>(DataCollectionNames.RecentlyOpened); }
         }
@@ -50,7 +51,7 @@ namespace Lbookshelf.ViewModels
                 PinnedCollection.Insert(book);
             }
         }
-        private Ldata.IDataCollection<Book> PinnedCollection
+        private IDataCollection<Book> PinnedCollection
         {
             get { return App.DataStore.GetCollection<Book>(DataCollectionNames.Pinned); }
         }
@@ -74,7 +75,7 @@ namespace Lbookshelf.ViewModels
 
         private const int NumberOfRecentItems = 5;
 
-        private void PushRecentItem(Book recentItem, ObservableCollection<Book> recentItems, Ldata.IDataCollection<Book> recentItemCollection)
+        private void PushRecentItem(Book recentItem, ObservableCollection<Book> recentItems, IDataCollection<Book> recentItemCollection)
         {
             // Remove this recent item if it exists in the list.
             recentItems.Remove(recentItem);
@@ -90,7 +91,7 @@ namespace Lbookshelf.ViewModels
             recentItemCollection.Insert(recentItems);
         }
 
-        private void RemoveIfExists(Book item, ObservableCollection<Book> items, Ldata.IDataCollection<Book> itemCollection)
+        private void RemoveIfExists(Book item, ObservableCollection<Book> items, IDataCollection<Book> itemCollection)
         {
             items.Remove(item);
             itemCollection.Remove(item);

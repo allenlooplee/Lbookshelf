@@ -37,20 +37,20 @@
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.5\lib\net45\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
+    <Reference Include="Lapps.Data">
+      <HintPath>..\..\Lapps.Data\Lapps.Data.Json\bin\Debug\Lapps.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Lapps.Data.Json">
+      <HintPath>..\..\Lapps.Data\Lapps.Data.Json\bin\Debug\Lapps.Data.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Lapps.Utils">
       <HintPath>..\..\Lapps.Utils\Lapps.Utils\bin\Debug\Lapps.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="Ldata">
-      <HintPath>..\..\Ldata\Ldata.Json\bin\Debug\Ldata.dll</HintPath>
-    </Reference>
-    <Reference Include="Ldata.Json">
-      <HintPath>..\..\Ldata\Ldata.Json\bin\Debug\Ldata.Json.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Ldata\Ldata.Json\bin\Debug\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Lapps.Data\Lapps.Data.Json\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp-WPF">
       <HintPath>lib\PdfSharp-WPF.dll</HintPath>
