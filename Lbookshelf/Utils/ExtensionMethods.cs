@@ -11,31 +11,6 @@ namespace Lbookshelf.Utils
 {
     public static class ExtensionMethods
     {
-        #region Collections
-
-        public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)
-        {
-            foreach (var item in collection)
-            {
-                action(item);
-            }
-        }
-
-        public static IEnumerable<T> ToEnumerable<T>(this T value)
-        {
-            yield return value;
-        }
-
-        public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)
-        {
-            foreach (var item in items)
-            {
-                collection.Add(item);
-            }
-        }
-
-        #endregion
-
         #region Models
 
         public static Book Clone(this Book source)

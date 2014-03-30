@@ -1,4 +1,5 @@
-﻿using Lbookshelf.Business;
+﻿using Lapps.Utils;
+using Lbookshelf.Business;
 using Lbookshelf.Models;
 using Lbookshelf.Services;
 using Lbookshelf.Utils;
@@ -11,6 +12,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Lapps.Utils.Collections;
 
 namespace Lbookshelf.ViewModels
 {

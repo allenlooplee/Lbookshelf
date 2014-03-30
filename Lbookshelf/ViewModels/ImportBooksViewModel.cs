@@ -1,4 +1,5 @@
-﻿using Lbookshelf.Business;
+﻿using Lapps.Utils;
+using Lbookshelf.Business;
 using Lbookshelf.Models;
 using Lbookshelf.Utils;
 using Microsoft.Expression.Interactivity.Core;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Lapps.Utils.Collections;
 
 namespace Lbookshelf.ViewModels
 {

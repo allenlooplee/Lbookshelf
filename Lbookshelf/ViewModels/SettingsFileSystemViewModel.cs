@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Configuration;
 using Lbookshelf.Utils;
 using Lbookshelf.Models;
+using Lapps.Utils;
+using Lapps.Utils.Collections;
 
 namespace Lbookshelf.ViewModels
 {

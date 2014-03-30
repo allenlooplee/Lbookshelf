@@ -37,6 +37,9 @@
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.5\lib\net45\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
+    <Reference Include="Lapps.Utils">
+      <HintPath>..\..\Lapps.Utils\Lapps.Utils\bin\Debug\Lapps.Utils.dll</HintPath>
+    </Reference>
     <Reference Include="Ldata">
       <HintPath>..\..\Ldata\Ldata.Json\bin\Debug\Ldata.dll</HintPath>
     </Reference>
@@ -130,12 +133,10 @@
     <Compile Include="Utils\BookCommands.cs" />
     <Compile Include="Utils\BuildContextMenuBehavior.cs" />
     <Compile Include="Utils\ChangeThumbnailBehavior.cs" />
-    <Compile Include="Utils\DelegateComparer.cs" />
     <Compile Include="Utils\DialogService.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
     <Compile Include="Utils\InvokeCommandOnEnterBehavior.cs" />
     <Compile Include="Utils\SortedObservableGroup.cs" />
-    <Compile Include="Utils\SortedObservableCollection.cs" />
     <Compile Include="Utils\Pair.cs" />
     <Compile Include="Utils\SettingManager.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -206,7 +207,6 @@
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Pages\ImportBooksPage.xaml.cs">
       <DependentUpon>ImportBooksPage.xaml</DependentUpon>
     </Compile>
