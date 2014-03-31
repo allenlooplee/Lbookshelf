@@ -38,6 +38,7 @@ namespace Lbookshelf.Services
                 return books
                     .Select(book => new Book
                     {
+                        Id = IdGenerator.Local.Next(),
                         Isbn = book["isbn13"].ValueOrDefault<string>(),
                         Title = book["title"].ValueOrDefault<string>(),
                         Authors = book["author"].ValuesOrDefault<string>().ToArray(),

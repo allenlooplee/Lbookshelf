@@ -47,7 +47,7 @@ namespace Lbookshelf.Services
             }
         }
 
-        public async Task<IEnumerable<Book>> FindBookInfoAsync(string keyword)
+        public async Task<Book[]> FindBookInfoAsync(string keyword)
         {
             Status = WorkStatus.Running;
             Message = String.Format("Contacting {0} for '{1}'...", Name, keyword);

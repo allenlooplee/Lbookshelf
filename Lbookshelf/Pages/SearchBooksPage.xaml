@@ -28,7 +28,7 @@
                     <utils:InvokeCommandOnEnterBehavior Command="{Binding SearchCommand}"/>
                 </i:Interaction.Behaviors>
             </TextBox>
-            <Button Grid.Column="1" Content="Search" Command="{Binding SearchCommand}" Width="80" Margin="6,0,0,0"/>
+            <Button Grid.Column="1" Content="search" Command="{Binding SearchCommand}" Width="80" Margin="6,0,0,0"/>
         </Grid>
 		<ListBox x:Name="results" ItemsSource="{Binding Results}" Grid.Row="1" Margin="0,0,18,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource StretchFlatListBoxItem}">
             <i:Interaction.Triggers>

@@ -65,6 +65,7 @@ namespace Lbookshelf.ViewModels
 
         public async void FindBookInfo(string title)
         {
+            IdGenerator.Local.Reset();
             Books.AddRange(await _bookService.FindBookInfoAsync(title));
             SelectedBook = Books.FirstOrDefault();
         }

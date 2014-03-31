@@ -121,6 +121,7 @@ namespace Lbookshelf.ViewModels
         {
             var book = new Book
             {
+                Id = IdGenerator.Global.Next(),
                 Title = Path.GetFileNameWithoutExtension(fileName),
                 Authors = new[] { DefaultPropertyValues.Author },
                 Category = DefaultPropertyValues.Category,

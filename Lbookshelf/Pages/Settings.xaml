@@ -13,6 +13,7 @@
                 <mui:Link DisplayName="file system" Source="/Content/SettingsFileSystemControl.xaml" />
                 <mui:Link DisplayName="services" Source="/Content/SettingsServicesControl.xaml" />
                 <mui:Link DisplayName="about" Source="/Content/About.xaml" />
+                <!--<mui:Link DisplayName="test console" Source="/Content/SettingsTestConsoleControl.xaml" />-->
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

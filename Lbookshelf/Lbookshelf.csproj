@@ -114,6 +114,9 @@
     <Compile Include="Content\SettingsServicesControl.xaml.cs">
       <DependentUpon>SettingsServicesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\SettingsTestConsoleControl.xaml.cs">
+      <DependentUpon>SettingsTestConsoleControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\StringArrayToLinksConverter.cs" />
     <Compile Include="Converters\StringToUriConverter.cs" />
@@ -135,6 +138,7 @@
     <Compile Include="Utils\ChangeThumbnailBehavior.cs" />
     <Compile Include="Utils\DialogService.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
+    <Compile Include="Utils\IdGenerator.cs" />
     <Compile Include="Utils\InvokeCommandOnEnterBehavior.cs" />
     <Compile Include="Utils\SortedObservableGroup.cs" />
     <Compile Include="Utils\Pair.cs" />
@@ -149,6 +153,7 @@
     <Compile Include="ViewModels\SearchBooksViewModel.cs" />
     <Compile Include="ViewModels\SettingsFileSystemViewModel.cs" />
     <Compile Include="ViewModels\SettingsServicesViewModel.cs" />
+    <Compile Include="ViewModels\SettingsTestConsoleViewModel.cs" />
     <Page Include="Content\ActionListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -178,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\SettingsServicesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\SettingsTestConsoleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

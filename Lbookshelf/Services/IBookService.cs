@@ -16,7 +16,7 @@ namespace Lbookshelf.Services
 
         string Message { get; }
 
-        Task<IEnumerable<Book>> FindBookInfoAsync(string keyword);
+        Task<Book[]> FindBookInfoAsync(string keyword);
     }
 
     public enum WorkStatus

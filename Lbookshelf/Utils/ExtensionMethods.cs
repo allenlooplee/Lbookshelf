@@ -17,6 +17,7 @@ namespace Lbookshelf.Utils
         {
             return new Book
             {
+                Id = source.Id,
                 Isbn = source.Isbn,
                 Category = source.Category,
                 Title = source.Title,
@@ -31,6 +32,8 @@ namespace Lbookshelf.Utils
 
         public static void MergeChanges(this Book original, Book changed)
         {
+            // The Id is ignore from merging.
+
             original.Isbn = changed.Isbn;
             original.Category = changed.Category;
             original.Title = changed.Title;

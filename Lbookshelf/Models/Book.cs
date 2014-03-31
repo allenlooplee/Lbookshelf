@@ -9,6 +9,8 @@ namespace Lbookshelf.Models
 {
     public class Book : ObservableObject, IEquatable<Book>, IComparable<Book>
     {
+        public int Id { get; set; }
+
         private string _isbn;
         // ISBN-13
         public string Isbn
@@ -169,7 +171,7 @@ namespace Lbookshelf.Models
                 return false;
             }
 
-            return this.Title == other.Title && this.Authors[0] == other.Authors[0];
+            return this.Id == other.Id;
         }
 
         public static bool operator ==(Book lhs, Book rhs)
@@ -199,7 +201,7 @@ namespace Lbookshelf.Models
 
         public override int GetHashCode()
         {
-            return (this.Title + this.Authors[0]).GetHashCode();
+            return this.Id;
         }
 
         #endregion
@@ -208,7 +210,7 @@ namespace Lbookshelf.Models
 
         public int CompareTo(Book other)
         {
-            return (this.Title + this.Authors[0]).CompareTo((other.Title + other.Authors[0]));
+            return this.Title.CompareTo(other.Title);
         }
 
         #endregion

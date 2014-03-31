@@ -38,6 +38,7 @@ namespace Lbookshelf.Services
                 return books.Children()["volumeInfo"]
                     .Select(book => new Book
                     {
+                        Id = IdGenerator.Local.Next(),
                         Isbn = TryGetIsbn13(book["industryIdentifiers"]),
                         Title = book["title"].ValueOrDefault<string>(),
                         Authors = book["authors"].ValuesOrDefault<string>().ToArray(),

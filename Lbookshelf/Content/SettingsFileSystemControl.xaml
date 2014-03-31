@@ -10,6 +10,6 @@
         <TextBox Text="{Binding RootDirectory}" Margin="0,0,0,12"/>
         <TextBlock Text="THUMBNAIL CACHE" Style="{StaticResource Heading2}" Margin="0,0,0,6"/>
         <TextBlock Text="Click Clean to check and remove any disused thumbnail." Margin="0,0,0,6"/>
-        <Button Content="Clean" Command="{Binding CleanCommand}" Width="80" HorizontalAlignment="Left" Margin="0,0,0,12"/>
+        <Button Content="clean" Command="{Binding CleanCommand}" Width="80" HorizontalAlignment="Left" Margin="0,0,0,12"/>
     </StackPanel>
 </UserControl>
