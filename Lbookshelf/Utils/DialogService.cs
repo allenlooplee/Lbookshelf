@@ -18,14 +18,12 @@ namespace Lbookshelf.Utils
         public static bool? ShowDialog(string title, Uri uri, object dataContext, Action okAction, Size? size = null)
         {
             var dialog = new ModernDialog();
+            dialog.SizeToContent = SizeToContent.Manual;
 
             if (size.HasValue)
             {
-                dialog.MinWidth = size.Value.Width;
-                dialog.MaxWidth = size.Value.Width;
-
-                dialog.MinHeight = size.Value.Height;
-                dialog.MaxHeight = size.Value.Height;
+                dialog.Width = size.Value.Width;
+                dialog.Height = size.Value.Height;
             }
 
             dialog.Title = title;
