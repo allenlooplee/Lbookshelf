@@ -93,8 +93,10 @@ namespace Lbookshelf.ViewModels
 
         private void RemoveIfExists(Book item, ObservableCollection<Book> items, IDataCollection<Book> itemCollection)
         {
-            items.Remove(item);
-            itemCollection.Remove(item);
+            if (items.Remove(item))
+            {
+                itemCollection.Remove(item);
+            }
         }
     }
 }
