@@ -88,7 +88,8 @@ namespace Lbookshelf.Utils
                             {
                                 DialogService.ShowDialog(ex.Message, "Error");
                             }
-                        });
+                        },
+                        new Size(500, 500));
                 });
 
             DeleteBookCommand = CreateCommand(
