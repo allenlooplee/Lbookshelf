@@ -8,7 +8,7 @@
     <Grid>
         <ScrollViewer>
             <StackPanel MinWidth="200">
-                <TextBlock Text="L'Bookshelf 0.9" Style="{StaticResource Heading2}" />
+                <TextBlock Text="L'Bookshelf 1.0 BETA" Style="{StaticResource Heading2}" />
                 <TextBlock Text="This product is licensed to Allen Lee for ebook management." Margin="0,12,0,8" TextWrapping="Wrap" />
                 <TextBlock Text="© 2014 Allen Lee. All rights reserved." Margin="0,0,0,8" TextWrapping="Wrap" />
             </StackPanel>
