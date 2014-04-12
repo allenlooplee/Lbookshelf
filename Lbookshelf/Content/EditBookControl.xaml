@@ -6,7 +6,7 @@
              xmlns:biz="clr-namespace:Lbookshelf.Business"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:utils="clr-namespace:Lbookshelf.Utils"
-             mc:Ignorable="d" Width="400"
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.ColumnDefinitions>
