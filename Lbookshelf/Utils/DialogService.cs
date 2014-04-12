@@ -15,15 +15,18 @@ namespace Lbookshelf.Utils
     public class DialogService
     {
         // This method is used to show dialog with custom content.
-        public static bool? ShowDialog(string title, Uri uri, object dataContext, Action okAction, Size? maxSize = null)
+        public static bool? ShowDialog(string title, Uri uri, object dataContext, Action okAction, Size? size = null)
         {
             var dialog = new ModernDialog();
             dialog.SizeToContent = SizeToContent.Width;
 
-            if (maxSize.HasValue)
+            if (size.HasValue)
             {
-                dialog.MaxWidth = maxSize.Value.Width;
-                dialog.MaxHeight = maxSize.Value.Height;
+                dialog.MinWidth = size.Value.Width;
+                dialog.MaxWidth = size.Value.Width;
+
+                dialog.MinWidth = size.Value.Height;
+                dialog.MaxHeight = size.Value.Height;
             }
 
             dialog.Title = title;
