@@ -19,7 +19,7 @@ namespace Lbookshelf.ViewModels
                 () =>
                 {
                     var bookCollection = App.DataStore.GetCollection<Book>(DataCollectionNames.Books);
-                    var books = bookCollection.AsEnumerable().ToArray();
+                    var books = bookCollection.AsQueryable().ToArray();
                     for (int i = 0; i < books.Length; i++)
                     {
                         books[i].Id = i + 1;

@@ -14,11 +14,11 @@ namespace Lbookshelf.ViewModels
     {
         public HomeViewModel()
         {
-            RecentlyAdded = new ObservableCollection<Book>(RecentlyAddedCollection.AsEnumerable());
+            RecentlyAdded = new ObservableCollection<Book>(RecentlyAddedCollection.AsQueryable());
 
-            RecentlyOpened = new ObservableCollection<Book>(RecentlyOpenedCollection.AsEnumerable());
+            RecentlyOpened = new ObservableCollection<Book>(RecentlyOpenedCollection.AsQueryable());
 
-            Pinned = new ObservableCollection<Book>(PinnedCollection.AsEnumerable().Reverse());
+            Pinned = new ObservableCollection<Book>(PinnedCollection.AsQueryable().Reverse());
         }
 
         public ObservableCollection<Book> RecentlyAdded { get; private set; }

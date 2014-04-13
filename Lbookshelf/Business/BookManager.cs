@@ -29,7 +29,7 @@ namespace Lbookshelf.Business
         private IDataCollection<Book> _books;
         public IEnumerable<Book> Books
         {
-            get { return _books.AsEnumerable(); }
+            get { return _books.AsQueryable(); }
         }
 
         public bool Exists(Book book)

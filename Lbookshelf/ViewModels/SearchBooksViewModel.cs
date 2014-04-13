@@ -20,7 +20,7 @@ namespace Lbookshelf.ViewModels
         {
             RecentKeywords =
                 new ObservableCollection<string>(
-                    RecentKeywordCollection.AsEnumerable().Take(NumberOfRecentItems));
+                    RecentKeywordCollection.AsQueryable().Take(NumberOfRecentItems));
 
             SearchCommand = new ActionCommand(() => Search(Keywords));
             QuickSearchCommand = new ActionCommand(

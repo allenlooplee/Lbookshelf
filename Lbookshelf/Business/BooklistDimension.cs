@@ -15,7 +15,7 @@ namespace Lbookshelf.Business
         public BooklistDimension()
             : base("Booklist")
         {
-            BooklistCollection.AsEnumerable().ForEach(booklist => Elements.Add(booklist));
+            BooklistCollection.AsQueryable().ForEach(booklist => Elements.Add(booklist));
         }
 
         /// <summary>
