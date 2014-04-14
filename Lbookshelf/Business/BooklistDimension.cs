@@ -43,8 +43,12 @@ namespace Lbookshelf.Business
         /// </summary>
         public override void Add(Book book)
         {
-            Elements.ForEach(g => g.Elements.Add(book));
-            BooklistCollection.Update(Elements);
+            Elements.ForEach(
+                g =>
+                {
+                    g.Elements.Add(book);
+                    BooklistCollection.Update(g);
+                });
         }
 
         /// <summary>
@@ -76,14 +80,18 @@ namespace Lbookshelf.Business
             var groups = Elements.Where(g => g.Elements.Remove(book)).ToArray();
 
             // Update non-empty booklist to database.
-            BooklistCollection.Update(groups.Where(g => g.Elements.Count > 0));
+            groups.Where(g => g.Elements.Count > 0).ForEach(BooklistCollection.Update);
 
             // If there's any empty booklist, it'll be removed from the database and the dimension.
             var emptyGroups = groups.Where(g => g.Elements.Count == 0);
             if (emptyGroups.Count() > 0)
             {
-                BooklistCollection.Remove(emptyGroups);
-                emptyGroups.ForEach(g => Elements.Remove(g));
+                emptyGroups.ForEach(
+                    g =>
+                    {
+                        Elements.Remove(g);
+                        BooklistCollection.Remove(g);
+                    });
                 RaiseGroupsChanged();
             }
         }

@@ -88,7 +88,7 @@ namespace Lbookshelf.ViewModels
             }
 
             recentItemCollection.Drop();
-            recentItemCollection.Insert(recentItems);
+            recentItemCollection.InsertBatch(recentItems);
         }
 
         private void RemoveIfExists(Book item, ObservableCollection<Book> items, IDataCollection<Book> itemCollection)

@@ -108,7 +108,7 @@ namespace Lbookshelf.ViewModels
             }
 
             RecentKeywordCollection.Drop();
-            RecentKeywordCollection.Insert(RecentKeywords);
+            RecentKeywordCollection.InsertBatch(RecentKeywords);
         }
 
         private IDataCollection<string> RecentKeywordCollection

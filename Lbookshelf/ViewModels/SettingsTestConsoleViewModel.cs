@@ -24,7 +24,7 @@ namespace Lbookshelf.ViewModels
                     {
                         books[i].Id = i + 1;
                     }
-                    bookCollection.Update(books);
+                    books.ForEach(bookCollection.Update);
                     DialogService.ShowDialog("Applied " + books.Length.ToString() + " books.");
                 });
         }
