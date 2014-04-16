@@ -11,6 +11,7 @@ using System.Windows.Input;
 using Lbookshelf.Utils;
 using Lapps.Utils;
 using Lapps.Data;
+using Lapps.Utils.Collections;
 
 namespace Lbookshelf.ViewModels
 {
@@ -108,7 +109,7 @@ namespace Lbookshelf.ViewModels
             }
 
             RecentKeywordCollection.Drop();
-            RecentKeywordCollection.InsertBatch(RecentKeywords);
+            RecentKeywords.ForEach(RecentKeywordCollection.Insert);
         }
 
         private IDataCollection<string> RecentKeywordCollection

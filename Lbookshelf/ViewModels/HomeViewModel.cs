@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lapps.Utils.Collections;
 
 namespace Lbookshelf.ViewModels
 {
@@ -88,7 +89,7 @@ namespace Lbookshelf.ViewModels
             }
 
             recentItemCollection.Drop();
-            recentItemCollection.InsertBatch(recentItems);
+            recentItems.ForEach(recentItemCollection.Insert);
         }
 
         private void RemoveIfExists(Book item, ObservableCollection<Book> items, IDataCollection<Book> itemCollection)
