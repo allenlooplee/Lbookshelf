@@ -25,6 +25,7 @@
             <converters:IntegerToBooleanConverter x:Key="IntegerToBoolean"/>
             <converters:IntegerToVisibilityConverter x:Key="IntegerToVisibility"/>
             <converters:EnumToVisibilityConverter x:Key="EnumToVisibility"/>
+            <converters:InverseBooleanConverter x:Key="InverseBoolean"/>
 
             <!--View models-->
             <!--<viewModels:BrowseBooksViewModel x:Key="BrowseBooks"/>-->

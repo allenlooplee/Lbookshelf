@@ -38,20 +38,25 @@ namespace Lbookshelf.ViewModels
                     DialogService.ShowOpenFileDialog(
                         async fileNames =>
                         {
-                            IsReadingPdfMetadata = true;
+                            IsPerformingAction = true;
 
                             foreach (var fileName in fileNames)
                             {
-                                _sourcePaths.Add(fileName);
-                                Books.Add(await ReadPdfMetadataAsync(fileName));
+                                // We need to skip duplicate files.
+
+                                if (!_sourcePaths.Contains(fileName))
+                                {
+                                    _sourcePaths.Add(fileName);
+                                    Books.Add(await ReadPdfMetadataAsync(fileName));
+                                }
                             }
 
-                            IsReadingPdfMetadata = false;
+                            IsPerformingAction = false;
                         });
                 });
 
             ImportCommand = new ActionCommand(
-                () =>
+                async () =>
                 {
                     if (!StorageManager.Instance.IsReady)
                     {
@@ -61,21 +66,43 @@ namespace Lbookshelf.ViewModels
                     }
                     else
                     {
-                        // Books that already exist in the library will be skipped silently.
-                        // But we need a graceful way to inform the user.
-                        _sourcePaths.Zip(Books, (sourcePath, book) => Tuple.Create(sourcePath, book))
-                        .Where(t => !BookManager.Instance.Exists(t.Item2))
-                        .ForEach(
-                            t =>
+                        // We need to provide a CheckBox for users to choose to skip/overwrite
+                        // if the books to be imported already exist in the library.
+
+                        // Here're the steps:
+                        // 1. Clear selected book because it might be removed from the import list.
+                        // 2. Add each book asynchronously.
+                        // 3. Skip any book if it already exists in the library.
+                        // 4. Remove the imported book from the import list.
+
+                        IsPerformingAction = true;
+
+                        SelectedBook = null;
+
+                        for (int i = Books.Count - 1; i >= 0; i--)
+                        {
+                            var book = Books[i];
+
+                            if (!BookManager.Instance.Exists(book))
                             {
-                                // Enable await for the completion of the underlying operations
-                                BookManager.Instance.Add(t.Item1, t.Item2);
+                                await BookManager.Instance.AddAsync(_sourcePaths[i], book);
+                                App.HomeViewModel.OnBookAdded(book);
 
-                                App.HomeViewModel.OnBookAdded(t.Item2);
-                            });
+                                _sourcePaths.RemoveAt(i);
+                                Books.RemoveAt(i);
+                            }
+                        }
 
-                        CleanUp();
+                        IsPerformingAction = false;
                     }
+                });
+
+            ClearCommand = new ActionCommand(
+                () =>
+                {
+                    SelectedBook = null;
+                    Books.Clear();
+                    _sourcePaths.Clear();
                 });
         }
 
@@ -101,21 +128,23 @@ namespace Lbookshelf.ViewModels
 
         public ICommand ChooseCommand { get; private set; }
 
-        private bool _isReadingPdfMetadata;
-        public bool IsReadingPdfMetadata
+        private bool _isPerformingAction;
+        public bool IsPerformingAction
         {
-            get { return _isReadingPdfMetadata; }
+            get { return _isPerformingAction; }
             set
             {
-                if (_isReadingPdfMetadata != value)
+                if (_isPerformingAction != value)
                 {
-                    _isReadingPdfMetadata = value;
+                    _isPerformingAction = value;
                     RaisePropertyChanged();
                 }
             }
         }
 
         public ICommand ImportCommand { get; private set; }
+
+        public ICommand ClearCommand { get; private set; }
 
         private async Task<Book> ReadPdfMetadataAsync(string fileName)
         {
@@ -156,13 +185,6 @@ namespace Lbookshelf.ViewModels
             }
 
             return book;
-        }
-
-        private void CleanUp()
-        {
-            _sourcePaths.Clear();
-            Books.Clear();
-            SelectedBook = null;
         }
     }
 }

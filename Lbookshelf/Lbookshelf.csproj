@@ -117,6 +117,7 @@
       <DependentUpon>SettingsTestConsoleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\StringArrayToLinksConverter.cs" />
     <Compile Include="Converters\StringToUriConverter.cs" />
     <Compile Include="Converters\IntegerToBooleanConverter.cs" />

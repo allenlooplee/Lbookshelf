@@ -34,11 +34,12 @@ namespace Lbookshelf.Business
 
         public bool Exists(Book book)
         {
-            return Books.Contains(book);
+            var referenceFileName = GenerateFileNameNoExt(book);
+            return Books.Any(b => GenerateFileNameNoExt(b) == referenceFileName);
         }
 
         // This method doesn't check if a book already exists, so do this before calling this method.
-        public async void Add(string sourcePath, Book book)
+        public async Task AddAsync(string sourcePath, Book book)
         {
             EnsureAuthors(book);
 
@@ -47,7 +48,7 @@ namespace Lbookshelf.Business
             book.FileName = fileNameNoExt + ".pdf";
             book.Thumbnail = await DownloadThumbnailAsync(book.Thumbnail, fileNameNoExt);
 
-            StorageManager.Instance.Add(sourcePath, book.Category, book.FileName);
+            await StorageManager.Instance.AddAsync(sourcePath, book.Category, book.FileName);
             _books.Insert(book);
             DimensionManager.Instance.Add(book);
         }

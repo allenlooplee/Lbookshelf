@@ -14,7 +14,7 @@
     <UserControl.Resources>
         <viewModels:ImportBooksViewModel x:Key="ImportBooks"/>
     </UserControl.Resources>
-    <Grid Style="{StaticResource ContentRoot}" DataContext="{Binding Source={StaticResource ImportBooks}}">
+    <Grid Style="{StaticResource ContentRoot}" DataContext="{Binding Source={StaticResource ImportBooks}}" IsEnabled="{Binding IsPerformingAction, Converter={StaticResource InverseBoolean}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -24,7 +24,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Choose one or more books to import by clicking the Choose button." FontSize="{StaticResource FontSizeMediumLarge}" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Books.Count, Converter={StaticResource IntegerToVisibility}, ConverterParameter='inverse'}"/>
-        <ProgressBar Visibility="{Binding IsReadingPdfMetadata, Converter={StaticResource BooleanToVisibilityConverter}}" Minimum="0" Maximum="1" Height="6" IsIndeterminate="True" VerticalAlignment="Top" Panel.ZIndex="1" Margin="0,0,6,0"/>
+        <ProgressBar Visibility="{Binding IsPerformingAction, Converter={StaticResource BooleanToVisibilityConverter}}" Minimum="0" Maximum="1" Height="6" IsIndeterminate="True" VerticalAlignment="Top" Panel.ZIndex="1" Margin="0,0,6,0"/>
         <ListBox ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource StretchFlatListBoxItem}" Margin="0,0,6,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -44,7 +44,8 @@
         <content:EditBookControl Grid.Column="1" Margin="6,0,0,6" DataContext="{Binding SelectedBook}" Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, ConverterParameter='inverse'}"/>
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="choose" Command="{Binding ChooseCommand}" Width="80" Margin="0,0,6,0"/>
-            <Button Content="import" Command="{Binding ImportCommand}" Width="80" IsEnabled="{Binding Books.Count, Converter={StaticResource IntegerToBoolean}}"/>
+            <Button Content="import" Command="{Binding ImportCommand}" Width="80" IsEnabled="{Binding Books.Count, Converter={StaticResource IntegerToBoolean}}" Margin="0,0,6,0"/>
+            <Button Content="clear" Command="{Binding ClearCommand}" Width="80" IsEnabled="{Binding Books.Count, Converter={StaticResource IntegerToBoolean}}" Margin="0,0,6,0"/>
         </StackPanel>
     </Grid>
 </UserControl>

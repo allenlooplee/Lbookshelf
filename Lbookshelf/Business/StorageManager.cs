@@ -71,7 +71,7 @@ namespace Lbookshelf.Business
             }
         }
 
-        public void Add(string sourcePath, string category, string fileName)
+        public async Task AddAsync(string sourcePath, string category, string fileName)
         {
             if (!IsReady)
             {
@@ -83,7 +83,16 @@ namespace Lbookshelf.Business
 
             var destinationDirectory = AddToSet(category);
             var destinationPath = Path.Combine(destinationDirectory, fileName);
-            FileSystem.CopyFile(sourcePath, destinationPath, UIOption.AllDialogs);
+            await CopyAsync(sourcePath, destinationPath);
+        }
+
+        private async Task CopyAsync(string sourceFileName, string destinationFileName)
+        {
+            using (var sourceStream = File.Open(sourceFileName, FileMode.Open))
+            using (var destinationStream = File.Create(destinationFileName))
+            {
+                await sourceStream.CopyToAsync(destinationStream);
+            }
         }
 
         // If the target file doesn't not exist, Remove will do nothing regarding
