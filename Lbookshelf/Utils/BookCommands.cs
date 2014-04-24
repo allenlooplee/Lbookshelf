@@ -20,7 +20,7 @@ namespace Lbookshelf.Utils
         static BookCommands()
         {
             OpenBookCommand = CreateCommand(
-                CreateOpenBookAction(path => Process.Start(path)));
+                CreateOpenBookAction(path => Process.Start(path), App.HomeViewModel.OnBookOpened));
 
             OpenBookInFileExplorerCommand = CreateCommand(
                 CreateOpenBookAction(path => Process.Start("explorer.exe", "/select, " + path)));
@@ -186,7 +186,7 @@ namespace Lbookshelf.Utils
                 });
         }
 
-        private static Action<Book> CreateOpenBookAction(Action<string> openFileAction)
+        private static Action<Book> CreateOpenBookAction(Action<string> openFileAction, Action<Book> postProcessAction = null)
         {
             return new Action<Book>(
                 book =>
@@ -197,7 +197,10 @@ namespace Lbookshelf.Utils
                     {
                         openFileAction(path);
 
-                        App.HomeViewModel.OnBookOpened(book);
+                        if (postProcessAction != null)
+                        {
+                            postProcessAction(book);
+                        }
                     }
                     else
                     {
