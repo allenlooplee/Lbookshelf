@@ -123,6 +123,7 @@
     <Compile Include="Converters\IntegerToBooleanConverter.cs" />
     <Compile Include="Converters\IntegerToVisibilityConverter.cs" />
     <Compile Include="Converters\UriToImageSourceConverter.cs" />
+    <Compile Include="Models\RecentItem.cs" />
     <Compile Include="Pages\BrowseBookGroupsPage.xaml.cs">
       <DependentUpon>BrowseBookGroupsPage.xaml</DependentUpon>
     </Compile>

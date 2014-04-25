@@ -1,4 +1,5 @@
-﻿using Lbookshelf.Models;
+﻿using Lapps.Data;
+using Lbookshelf.Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,69 @@ namespace Lbookshelf.Utils
 {
     public static class ExtensionMethods
     {
+        #region Collections
+
+        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> collection)
+        {
+            return new ObservableCollection<T>(collection);
+        }
+
+        public static bool Remove<T>(this ICollection<T> collection, Func<T, bool> predicate)
+        {
+            var match = collection.FirstOrDefault(predicate);
+
+            if (match != null)
+            {
+                return collection.Remove(match);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static int RemoveAll<T>(this ICollection<T> collection, Func<T, bool> predicate)
+        {
+            var matches = collection.Where(predicate).ToArray();
+
+            foreach (var match in matches)
+            {
+                collection.Remove(match);
+            }
+
+            return matches.Length;
+        }
+
+        public static bool Remove<T>(this IDataCollection<T> collection, Func<T, bool> predicate)
+        {
+            var result = false;
+
+            var match = collection.AsQueryable().FirstOrDefault(predicate);
+
+            if (match != null)
+            {
+                collection.Remove(match);
+
+                result = true;
+            }
+
+            return result;
+        }
+
+        public static int RemoveAll<T>(this IDataCollection<T> collection, Func<T, bool> predicate)
+        {
+            var matches = collection.AsQueryable().Where(predicate).ToArray();
+
+            foreach (var match in matches)
+            {
+                collection.Remove(match);
+            }
+
+            return matches.Length;
+        }
+
+        #endregion
+
         #region Models
 
         public static Book Clone(this Book source)
