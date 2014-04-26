@@ -15,9 +15,18 @@ namespace Lbookshelf.ViewModels
     {
         public HomeViewModel()
         {
-            RecentlyAdded = RecentlyAddedCollection.AsQueryable().Reverse().Take(NumberOfRecentItems).ToObservableCollection();
+            RecentlyAdded =
+                RecentlyAddedCollection.AsQueryable()
+                .Reverse()
+                .Take(NumberOfRecentItems)
+                .ToObservableCollection();
 
-            RecentlyOpened = RecentlyOpenedCollection.AsQueryable().Reverse().Take(NumberOfRecentItems).ToObservableCollection();
+            RecentlyOpened =
+                RecentlyOpenedCollection.AsQueryable()
+                .Reverse()
+                .Distinct(DelegateEqualityComparer.Make<RecentItem>((x, y) => x.Book == y.Book, b => b.Book.GetHashCode()))
+                .Take(NumberOfRecentItems)
+                .ToObservableCollection();
 
             Pinned = new ObservableCollection<Book>(PinnedCollection.AsQueryable().Reverse());
         }
