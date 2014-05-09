@@ -29,7 +29,7 @@
                                 <i:EventTrigger EventName="MouseDoubleClick">
                                     <i:InvokeCommandAction
                                     Command="{x:Static utils:BookCommands.OpenBookCommand}"
-                                    CommandParameter="{Binding SelectedItem, ElementName=recentlyAdded}"/>
+                                    CommandParameter="{Binding SelectedItem.Book, ElementName=recentlyAdded}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </ListBox>
@@ -41,7 +41,7 @@
                                 <i:EventTrigger EventName="MouseDoubleClick">
                                     <i:InvokeCommandAction
                                     Command="{x:Static utils:BookCommands.OpenBookCommand}"
-                                    CommandParameter="{Binding SelectedItem, ElementName=recentlyOpened}"/>
+                                    CommandParameter="{Binding SelectedItem.Book, ElementName=recentlyOpened}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </ListBox>
