@@ -16,4 +16,4 @@ Features
 Build and run
 ==========
 
-To run L'Bookshelf, you'll need to build it with Visual Studio 2013 or [Visual Studio Express 2013](http://www.microsoft.com/click/services/Redirect2.ashx?CR_CC=200395106). .NET Framework 4.5 is required on the client machine. The source code is licensed under MIT License.
+To run L'Bookshelf on Windows, you'll need to build it with Visual Studio 2013 or [Visual Studio Express 2013](http://www.microsoft.com/click/services/Redirect2.ashx?CR_CC=200395106). .NET Framework 4.5 is required on the client machine. The source code is licensed under MIT License.
