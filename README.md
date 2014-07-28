@@ -7,7 +7,7 @@ Features
 ==========
 
 - Import ebooks (currently pdf only) to a specified location, local or removable.
-- Read metadata from pdf with PDFSharp.
+- Read metadata from pdf with [PDFSharp](http://pdfsharp.com/PDFsharp/).
 - Fetch all required metadata such as title, authors, publisher, description, etc with [Google Books API](https://developers.google.com/books/) or [Douban API](http://developers.douban.com/wiki/?title=guide).
 - Manage ebooks through different dimensions such as category, publisher, or booklist. Under the hook, ebooks are stored in a directory structure based on categories.
 - Search ebooks through their title.
