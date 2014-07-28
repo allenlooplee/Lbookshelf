@@ -45,7 +45,8 @@ namespace Lbookshelf.Utils
                         () =>
                         {
                             dimension.Add(dataContext.Item2, book);
-                        });
+                        },
+                        new Size(350, 200));
                 });
 
             RemoveFromBooklistCommand = new ActionCommand(
@@ -88,8 +89,7 @@ namespace Lbookshelf.Utils
                             {
                                 DialogService.ShowDialog(ex.Message, "Error");
                             }
-                        },
-                        new Size(500, 500));
+                        });
                 });
 
             DeleteBookCommand = CreateCommand(

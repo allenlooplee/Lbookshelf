@@ -18,7 +18,11 @@ namespace Lbookshelf.Utils
         public static bool? ShowDialog(string title, Uri uri, object dataContext, Action okAction, Size? size = null)
         {
             var dialog = new ModernDialog();
-            dialog.SizeToContent = SizeToContent.Width;
+
+            // This settings are for EditBookControl.
+            dialog.MaxWidth = 500;
+            dialog.MinWidth = 500;
+            dialog.SizeToContent = SizeToContent.Height;
 
             if (size.HasValue)
             {
@@ -27,6 +31,8 @@ namespace Lbookshelf.Utils
 
                 dialog.MinWidth = size.Value.Height;
                 dialog.MaxHeight = size.Value.Height;
+
+                dialog.SizeToContent = SizeToContent.Manual;
             }
 
             dialog.Title = title;
@@ -34,7 +40,6 @@ namespace Lbookshelf.Utils
 
             var okButton = dialog.OkButton;
             okButton.Width = 80;
-            //okButton.Content = "OK";
             okButton.Command = new ActionCommand(
                 () =>
                 {
@@ -49,7 +54,6 @@ namespace Lbookshelf.Utils
 
             var cancelButton = dialog.CancelButton;
             cancelButton.Width = 80;
-            //cancelButton.Content = "Cancel";
             cancelButton.Margin = new Thickness(6, 0, 0, 0);
 
             dialog.Buttons = new[] { okButton, cancelButton };

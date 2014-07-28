@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Width="300"
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
         <ComboBox ItemsSource="{Binding Item1}" Text="{Binding Item2}" IsEditable="True" Margin="0,0,0,12"/>
-        <TextBlock Text="The booklists that already contain the book are now listed here." Foreground="Gray" TextWrapping="Wrap"/>
+        <TextBlock Text="The booklists that already contain the book are not listed here." Foreground="Gray" TextWrapping="Wrap"/>
     </StackPanel>
 </UserControl>
