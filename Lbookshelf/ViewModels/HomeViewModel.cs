@@ -8,10 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lapps.Utils.Collections;
+using System.Windows.Input;
+using System.IO;
+using Lbookshelf.Business;
 
 namespace Lbookshelf.ViewModels
 {
-    public class HomeViewModel
+    public class HomeViewModel : AsyncViewModelBase
     {
         public HomeViewModel()
         {
@@ -29,6 +32,26 @@ namespace Lbookshelf.ViewModels
                 .ToObservableCollection();
 
             Pinned = new ObservableCollection<Book>(PinnedCollection.AsQueryable().Reverse());
+
+            CachePinnedBooksCommand = CreateAsyncCommand(
+                async () =>
+                {
+                    if (!Directory.Exists(CacheDirectory))
+                    {
+                        Directory.CreateDirectory(CacheDirectory);
+                    }
+
+                    var uncachedBooks = Pinned.Where(b => !b.FileName.StartsWith(CacheDirectory));
+                    foreach (var uncachedBook in uncachedBooks)
+                    {
+                        var sourcePath = Path.Combine(StorageManager.Instance.RootDirectory, uncachedBook.Category, uncachedBook.FileName);
+                        var cachePath = Path.Combine(CacheDirectory, uncachedBook.FileName);
+                        await StorageManager.CopyAsync(sourcePath, cachePath);
+
+                        uncachedBook.FileName = cachePath;
+                        PinnedCollection.Update(uncachedBook);
+                    }
+                });
         }
 
         public ObservableCollection<RecentItem> RecentlyAdded { get; private set; }
@@ -50,21 +73,32 @@ namespace Lbookshelf.ViewModels
         }
         public void PinOrUnpin(Book book)
         {
-            if (IsPinned(book))
+            var found = Pinned.FirstOrDefault(b => b.Id == book.Id);
+            if (found != null)
             {
+                // Remove the pinned book from cache if exists.
+                if (found.FileName.StartsWith(CacheDirectory))
+                {
+                    File.Delete(found.FileName);
+                }
+
                 Pinned.Remove(book);
                 PinnedCollection.Remove(book);
             }
             else
             {
-                Pinned.Insert(0, book);
-                PinnedCollection.Insert(book);
+                var clone = book.Clone();
+
+                Pinned.Insert(0, clone);
+                PinnedCollection.Insert(clone);
             }
         }
         private IDataCollection<Book> PinnedCollection
         {
             get { return App.DataStore.GetCollection<Book>(DataCollectionNames.Pinned); }
         }
+        public ICommand CachePinnedBooksCommand { get; private set; }
+        private const string CacheDirectory = "Cache";
 
         /// <summary>
         /// The book will be added to the top. If the count of the list

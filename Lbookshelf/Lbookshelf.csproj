@@ -151,6 +151,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>SettingManager.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AsyncViewModelBase.cs" />
     <Compile Include="ViewModels\BrowseBooksViewModel.cs" />
     <Compile Include="ViewModels\FindBookInfoViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />

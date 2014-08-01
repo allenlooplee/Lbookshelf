@@ -58,8 +58,8 @@ namespace Lbookshelf.Utils
             {
                 ItemsSource = new Control[]
                 {
-                    CreateOpenBookMenuItem(book),
-                    CreateOpenBookInFileExplorerMenuItem(book),
+                    CreateOpenPinnedBookMenuItem(book),
+                    //CreateOpenBookInFileExplorerMenuItem(book),
                     new Separator(),
                     CreatePinOrUnpinMenuItem(book),
                     CreateAddToBooklistMenuItem(book),
@@ -117,6 +117,16 @@ namespace Lbookshelf.Utils
                     new Separator(),
                     CreateShowBookInfoMenuItem(book)
                 }
+            };
+        }
+
+        private MenuItem CreateOpenPinnedBookMenuItem(Book book)
+        {
+            return new MenuItem
+            {
+                Header = "Open",
+                Command = BookCommands.OpenPinnedBookCommand,
+                CommandParameter = book
             };
         }
 

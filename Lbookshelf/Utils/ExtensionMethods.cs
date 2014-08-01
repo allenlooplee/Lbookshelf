@@ -1,9 +1,11 @@
 ﻿using Lapps.Data;
+using Lbookshelf.Business;
 using Lbookshelf.Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -109,6 +111,16 @@ namespace Lbookshelf.Utils
 
             // The FileName was determined when the book was imported.
             // Changes to it is not supported within the app.
+        }
+
+        public static string GetPath(this Book book)
+        {
+            return Path.Combine(StorageManager.Instance.RootDirectory, book.Category, book.FileName);
+        }
+
+        public static bool IsCached(this Book book)
+        {
+            return book.FileName.StartsWith("Cache");
         }
 
         #endregion

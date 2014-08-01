@@ -19,13 +19,15 @@ namespace Lbookshelf.Utils
     {
         static BookCommands()
         {
-            OpenBookCommand = CreateCommand(
-                CreateOpenBookAction(path => Process.Start(path), App.HomeViewModel.OnBookOpened));
+            OpenPinnedBookCommand = CreateCommand(OpenPinnedBook);
 
+            OpenBookCommand = CreateCommand(OpenBook);
+
+            // If the path doesn't exist, the File Explorer will open with default view.
             OpenBookInFileExplorerCommand = CreateCommand(
-                CreateOpenBookAction(path => Process.Start("explorer.exe", "/select, " + path)));
+                book => Process.Start("explorer.exe", "/select, " + book.GetPath()));
 
-            AddToBooklistCommand = new ActionCommand(
+            AddToBooklistCommand = CreateCommand(
                 obj =>
                 {
                     var book = (Book)obj;
@@ -49,7 +51,7 @@ namespace Lbookshelf.Utils
                         new Size(350, 200));
                 });
 
-            RemoveFromBooklistCommand = new ActionCommand(
+            RemoveFromBooklistCommand = CreateCommand(
                 obj =>
                 {
                     var book = (Book)obj;
@@ -58,7 +60,7 @@ namespace Lbookshelf.Utils
                     booklist.Remove(App.BrowseBooksViewModel.SelectedGroupKey, book);
                 });
 
-            EditBookCommand = CreateCommand(
+            EditBookCommand = CreateCommand(CreateGuardedAction(
                 book =>
                 {
                     var changed = book.Clone();
@@ -90,9 +92,9 @@ namespace Lbookshelf.Utils
                                 DialogService.ShowDialog(ex.Message, "Error");
                             }
                         });
-                });
+                }));
 
-            DeleteBookCommand = CreateCommand(
+            DeleteBookCommand = CreateCommand(CreateGuardedAction(
                 book =>
                 {
                     if (DialogService.ShowDialog(
@@ -112,9 +114,9 @@ namespace Lbookshelf.Utils
                             DialogService.ShowDialog(ex.Message, "Error");
                         }
                     }
-                });
+                }));
 
-            FindBookInfoCommand = new ActionCommand(
+            FindBookInfoCommand = CreateCommand(
                 obj =>
                 {
                     var book = (Book)obj;
@@ -136,7 +138,7 @@ namespace Lbookshelf.Utils
                         new Size(600, 500));
                 });
 
-            ShowBookInfoCommand = new ActionCommand(
+            ShowBookInfoCommand = CreateCommand(
                 obj =>
                 {
                     var original = (Book)obj;
@@ -151,6 +153,8 @@ namespace Lbookshelf.Utils
                         new Size(500, 500));
                 });
         }
+
+        public static ICommand OpenPinnedBookCommand { get; private set; }
 
         public static ICommand OpenBookCommand { get; private set; }
 
@@ -170,37 +174,64 @@ namespace Lbookshelf.Utils
 
         private static ICommand CreateCommand(Action<Book> bookAction)
         {
-            return new ActionCommand(
-                obj =>
-                {
-                    if (!StorageManager.Instance.IsReady)
-                    {
-                        DialogService.ShowDialog(
-                            "The drive your bookshelf resides in is not ready. Please plug in the removable drive, and try again.",
-                            "Drive Not Ready");
-                    }
-                    else
-                    {
-                        bookAction((Book)obj);
-                    }
-                });
+            return new ActionCommand(obj => bookAction((Book)obj));
         }
 
-        private static Action<Book> CreateOpenBookAction(Action<string> openFileAction, Action<Book> postProcessAction = null)
+        private static Action<Book> CreateGuardedAction(Action<Book> bookAction)
         {
-            return new Action<Book>(
-                book =>
+            return new Action<Book>(book => StorageGuard(() => bookAction(book)));
+        }
+
+        private static void StorageGuard(Action bookAction)
+        {
+            if (!StorageManager.Instance.IsReady)
+            {
+                DialogService.ShowDialog(
+                    "The drive your bookshelf resides in is not ready. Please plug in the removable drive, and try again.",
+                    "Drive Not Ready");
+            }
+            else
+            {
+                bookAction();
+            }
+        }
+
+        private static void OpenPinnedBook(Book book)
+        {
+            // Steps for openning a book from cache:
+            // 1. Check if the file exists
+            // 2. Open the book directly if it exists in cache
+            // 3. Open the book in storage location if it doesn't exist in cache
+
+            if (File.Exists(book.FileName))
+            {
+                Process.Start(book.FileName);
+                App.HomeViewModel.OnBookOpened(book);
+            }
+            else
+            {
+                OpenBook(BookManager.Instance.Books.First(b => b.Id == book.Id));
+            }
+        }
+
+        private static void OpenBook(Book book)
+        {
+            // Steps for openning a book from storage location:
+            // 1. Check if the drive is ready
+            // 2. Prompt the user when the drive is not ready
+            // 3. Check if the file exists
+            // 4. Prompt the user a list of actions to take when book not exists
+            // 5. Open the book from its location
+
+            StorageGuard(
+                () =>
                 {
-                    var path = Path.Combine(StorageManager.Instance.RootDirectory, book.Category, book.FileName);
+                    var path = book.GetPath();
 
                     if (File.Exists(path))
                     {
-                        openFileAction(path);
-
-                        if (postProcessAction != null)
-                        {
-                            postProcessAction(book);
-                        }
+                        Process.Start(path);
+                        App.HomeViewModel.OnBookOpened(book);
                     }
                     else
                     {
@@ -232,7 +263,8 @@ namespace Lbookshelf.Utils
                                             changedBook.FileName = Path.GetFileName(fileName);
 
                                             BookManager.Instance.Update(book, changedBook);
-                                            openFileAction(fileName);
+                                            Process.Start(fileName);
+                                            App.HomeViewModel.OnBookOpened(book);
                                         },
                                         StorageManager.Instance.RootDirectory);
                                 }));

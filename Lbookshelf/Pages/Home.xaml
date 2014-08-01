@@ -14,7 +14,8 @@
             <TextBlock Text="{Binding Book.Title}" FontSize="{StaticResource FontSizeNormal}" Margin="6,3,6,3" TextTrimming="CharacterEllipsis"/>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid Style="{StaticResource ContentRoot}" DataContext="{x:Static global:App.HomeViewModel}">
+    <Grid Style="{StaticResource ContentRoot}" DataContext="{x:Static global:App.HomeViewModel}" IsEnabled="{Binding IsPerformingAction, Converter={StaticResource InverseBoolean}}">
+        <ProgressBar Visibility="{Binding IsPerformingAction, Converter={StaticResource BooleanToVisibilityConverter}}" Minimum="0" Maximum="1" Height="6" IsIndeterminate="True" VerticalAlignment="Top" Panel.ZIndex="1" Grid.ColumnSpan="3" Margin="0,-12,0,0"/>
         <ScrollViewer HorizontalScrollBarVisibility="Auto">
             <StackPanel Orientation="Horizontal" MinWidth="200">
                 <Grid Width="250">
@@ -48,12 +49,19 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel Margin="24,0,0,0">
-                    <TextBlock Text="PINNED" Style="{StaticResource Heading2}" Margin="3,0,0,6"/>
+                    <StackPanel Orientation="Horizontal" Margin="3,0,0,6">
+                        <TextBlock Text="PINNED" Style="{StaticResource Heading2}"/>
+                        <mui:ModernButton Command="{Binding CachePinnedBooksCommand}" ToolTip="Cache all pinned books in app folder" Margin="6,0,0,0">
+                            <mui:ModernButton.IconData>
+                                F1 M 30,24L 36,24L 36,30L 41,30L 33,38L 25,30L 30,30L 30,24 Z M 13,13L 31,13L 35,17L 35,23L 32.9999,23L 32.9999,18.0001L 30,15L 29,15L 29,23L 28,23L 18,23L 18,15L 15,15.0001L 15,33L 26,33L 28,35L 13,35L 13,13 Z M 25,15L 25,21L 27,21L 27,15L 25,15 Z
+                            </mui:ModernButton.IconData>
+                        </mui:ModernButton>
+                    </StackPanel>
                     <ListBox x:Name="pinned" ItemsSource="{Binding Pinned}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction
-                                    Command="{x:Static utils:BookCommands.OpenBookCommand}"
+                                    Command="{x:Static utils:BookCommands.OpenPinnedBookCommand}"
                                     CommandParameter="{Binding SelectedItem, ElementName=pinned}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
@@ -64,7 +72,7 @@
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
+                                <Grid ToolTip="{Binding Title}">
                                     <i:Interaction.Behaviors>
                                         <utils:BuildContextMenuBehavior TemplateName="Pinned"/>
                                     </i:Interaction.Behaviors>

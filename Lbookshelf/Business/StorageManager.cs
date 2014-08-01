@@ -86,15 +86,6 @@ namespace Lbookshelf.Business
             await CopyAsync(sourcePath, destinationPath);
         }
 
-        private async Task CopyAsync(string sourceFileName, string destinationFileName)
-        {
-            using (var sourceStream = File.Open(sourceFileName, FileMode.Open))
-            using (var destinationStream = File.Create(destinationFileName))
-            {
-                await sourceStream.CopyToAsync(destinationStream);
-            }
-        }
-
         // If the target file doesn't not exist, Remove will do nothing regarding
         // to the file. The category will still be removed if it exists and is empty.
         public void Remove(string category, string fileName)
@@ -193,6 +184,15 @@ namespace Lbookshelf.Business
             {
                 // Delete the underlying directory when there's no file in it.
                 Directory.Delete(directory);
+            }
+        }
+
+        internal static async Task CopyAsync(string sourceFileName, string destinationFileName)
+        {
+            using (var sourceStream = File.Open(sourceFileName, FileMode.Open))
+            using (var destinationStream = File.Create(destinationFileName))
+            {
+                await sourceStream.CopyToAsync(destinationStream);
             }
         }
     }
