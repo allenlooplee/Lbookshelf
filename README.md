@@ -12,6 +12,7 @@ Features
 - Manage ebooks through different dimensions such as category, publisher, or booklist. Under the hook, ebooks are stored in a directory structure based on categories.
 - Search ebooks through their title.
 - Pin frequently opened ebooks to home page.
+- Cache pinned books in app folder. This is useful when the user stores the books in a removable drive that's not always at hand.
 
 Build and run
 ==========
