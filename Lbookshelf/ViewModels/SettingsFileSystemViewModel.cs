@@ -23,7 +23,9 @@ namespace Lbookshelf.ViewModels
                 () =>
                 {
                     var used = BookManager.Instance.Books.Select(b => Path.Combine(Environment.CurrentDirectory, b.Thumbnail));
-                    var cached = Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "Images"));
+                    var cached = Directory
+                        .GetFiles(Path.Combine(Environment.CurrentDirectory, "Images"))
+                        .Where(p => Path.GetFileName(p) != "DefaultThumbnail.jpg");
                     var disused = cached.Except(used).ToArray();
 
                     if (disused.Length > 0)
