@@ -210,7 +210,12 @@ namespace Lbookshelf.Models
 
         public int CompareTo(Book other)
         {
-            return this.Title.CompareTo(other.Title);
+            return GetComparableText(this).CompareTo(GetComparableText(other));
+        }
+
+        private string GetComparableText(Book book)
+        {
+            return book.Title + " - " + book.Authors[0];
         }
 
         #endregion
